@@ -1,24 +1,31 @@
 name: ci-wf
 
 on:
-   pull_request:
-     branches:
-     - develop
-     types:
-     - opened 
-     - synchronize
-   push:
-     branches:
-     - develop  
+  pull_request:
+    branches:
+      - develop
+    types:
+      - opened
+      - synchronize
+  push:
+    branches:
+      - develop
+
 jobs:
- linting-job:
-   runs-on: ubuntu-latest
-   steps:
-     - name : welcome steps 
-       run: echo "ci piple for this repo"
-     - name : Checkout Repoaitory 
-       uses: actions/checkout@v4
-     - name: Lint HTML Files 
-       run: npx htmlhint "**/*.html"
-     - name: Lint CSS Files 
-       run:   npx stylelint "**/*.css"   
+  linting-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome Step
+        run: echo "CI pipeline for this repo"
+        
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: npm install --save-dev stylelint stylelint-config-standard htmlhint
+
+      - name: Lint HTML Files
+        run: npx htmlhint "**/*.html"
+
+      - name: Lint CSS Files
+        run: npx stylelint "**/*.css"

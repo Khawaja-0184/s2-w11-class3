@@ -1,0 +1,24 @@
+name: ci-wf
+
+on:
+   pull_request:
+     branches:
+     - develop
+     types:
+     - opened 
+     - synchronize
+   push:
+     branches:
+     - develop  
+jobs:
+ linting-job:
+   runs-on: ubuntu-latest
+   steps:
+     - name : welcome steps 
+       run: echo "ci piple for this repo"
+     - name : Checkout Repoaitory 
+       uses: actions/checkout@v4
+     - name: Lint HTML Files 
+       run: npx htmlhint "**/*.html"
+     - name: Lint CSS Files 
+       run:   npx stykelint "**/*.css"   
